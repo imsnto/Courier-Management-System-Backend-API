@@ -87,6 +87,8 @@ Follow these steps to set up the project locally:
 
 ## Running the Application Locally
 
+## Running the Application Locally
+
 To run the application on your local machine:
 
 1. **Start the Development Server**:
@@ -96,7 +98,19 @@ To run the application on your local machine:
    The application will be available at `http://127.0.0.1:8000`.
 
 2. **Access the Admin Panel**:
-   Open `http://127.0.0.1:8000/admin/` in your browser and log in with the superuser credentials.
+   Open `http://127.0.0.1:8000/admin/` or `https://courier-management-system-backend-api-53k6.onrender.com/admin/` in your browser and log in with the following superuser credentials:
+
+   | Username  | Password |
+   |-----------|----------|
+   | solaiman  | 123456   |
+
+3. **Creating Products, Users, and Orders**:
+   - Log in to the admin panel using the above credentials.
+   - Navigate to the respective sections to create:
+     - **Users**: Add new users with roles (Admin, Delivery Man, User) under the "Users" section.
+     - **Products**: Add products with name, description, and price under the "Products" section.
+     - **Orders**: Create orders by selecting a user, product, delivery man (optional), quantity, status, and delivery address under the "Orders" section.
+   - Ensure you save each entry to update the database.
 
 ## Deployment
 
