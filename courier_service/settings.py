@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'accounts',  
     'orders',
+    'payments',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +142,11 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1440),  
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7)
 }
+
+from decouple import config
+
+# Stripe settings
+STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY', default='')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY', default='')
+
+DOMAIN = "http://127.0.0.1:8000"
