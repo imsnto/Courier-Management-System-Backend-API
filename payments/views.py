@@ -35,10 +35,13 @@ class CreateCheckoutSession(APIView):
                     {
                         "price_data": {
                             "currency": currency,
-                            "product_data": {"name": "Product Purchase"},
+                            "product_data": {
+                                "name": order.product.name,
+                                "description": order.product.description
+                                },
                             "unit_amount": amount,
                         },
-                        "quantity": 1,
+                        "quantity": order.quantity,
                     },
                 ],
                 mode="payment",
@@ -56,6 +59,8 @@ class CreateCheckoutSession(APIView):
                 currency=currency,
                 order= Order.objects.get(id=data.get("order_id"))
             )
+            order.status = 'In Progress'
+            order.save()
 
             return Response({"checkout_url": session["url"]}, status=status.HTTP_200_OK)
         except Exception as e:
@@ -71,6 +76,12 @@ class PaymentSuccess(APIView):
             payment = Payment.objects.get(stripe_payment_intent_id=payment_intent)
             payment.status = 'completed'
             payment.save()
+
+            order = payment.order
+            order.status = 'Completed'
+            order.save()
+
+            
 
             return Response({"message": "Payment successful!"}, status=status.HTTP_200_OK)
         except stripe.error.InvalidRequestError:
